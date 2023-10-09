@@ -1,7 +1,11 @@
 package tradearea.model;
 
+import tradearea.warehouse.Product;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class WarehouseData {
 	
@@ -9,13 +13,53 @@ public class WarehouseData {
 	private String warehouseName;
 	private String timestamp;
 
+	private WarehouseData data;
+
+	// list
+	private List<Product> productData;
+
 	/**
 	 * Constructor
 	 */
 	public WarehouseData() {
 		
 		this.timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
+		this.productData = new ArrayList<>();
 
+	}
+
+	public List<Product> getProductData() {
+		return productData;
+	}
+
+	public String getProductDataAsJSON() {
+		StringBuilder jsonBuilder = new StringBuilder();
+
+		jsonBuilder.append("["); // Anfang des JSON-Arrays
+		System.out.println("hier");
+		for (Product product : productData) {
+			jsonBuilder.append("{"); // Anfang des JSON-Objekts
+
+			jsonBuilder.append("\"productName\":\"").append(product.getProductName()).append("\",");
+			System.out.println(product.getProductName());
+			jsonBuilder.append("\"productCategory\":\"").append(product.getProductCategory()).append("\"");
+
+			jsonBuilder.append("},"); // Ende des JSON-Objekts
+		}
+
+		if (!productData.isEmpty()) {
+			// Entfernen Sie das letzte Komma, wenn die Liste nicht leer ist
+			jsonBuilder.deleteCharAt(jsonBuilder.length() - 1);
+		}
+
+		jsonBuilder.append("]"); // Ende des JSON-Arrays
+
+		return jsonBuilder.toString();
+	}
+
+
+	public void setProductData(List<Product> productData) {
+		this.productData = productData;
 	}
 	
 	/**
