@@ -6,3 +6,4 @@ Die detaillierte [Aufgabenstellung](TASK.md) beschreibt die notwendigen Schritte
 ## Implementierung
 
 ## Quellen
+# DEZSYS_GK71_REST_GKv
